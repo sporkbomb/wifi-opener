@@ -1,0 +1,36 @@
+INTRODUCTION
+
+The files in this directory exploit the well-known default key algorithm of a nmuber of Thomson SpeedTouch home routers distributed, amongst others, by BT in the UK.
+
+The short version: If you see a network with a SSID like "ThomsonABCDEF", this script will likely give you the correct PSK, allowing you to connect to the network (and, in most cases, use your neighbour's line...which is highly illegal in most countries, so don't do that).
+
+For a much better description and more details, please see http://www.gnucitizen.org/blog/default-key-algorithm-in-thomson-and-bt-home-hub-routers/.
+
+USAGE
+
+You'll need to generate the pre-calculated hash tables used by the key lookup. I chose to not include them because they tend to become rather large and would therefore clutter up this repository.
+
+Have a look at psk_table_calculator.py and edit it to your needs. Basically, you just need to edit the year and the output filename. Make sure to use the output file format touchspeedcalc_YYYY.dat, otherwise the lookup will not use them. (You could, of course, also edit the lookup script)
+My suggestion is to generate tables for at least 2006-2010. They take up 7MB each, so don't worry about HDD space.
+
+Be sure to move those .dat files into data/ (or edit the lookup script, as usual).
+
+If you want, you can check out touchspeedcalc_test.py, which is the actual lookup script that will try to find possible default PSKs.
+
+My main contribution (both of the aforementioned scripts were not written by me, as stated in their headers) is scanner.sh. Please read the beginning of that file for a more complete description, its basic functionality is to scan for SSIDs that match the default Thomson/SpeedTouch SSID pattern and try out possible PSKs (usually there are no more than 4 guesses) until it finds the correct one. It can also execute a script automatically after connecting.
+
+
+NOTES
+
+As mentioned before, the only files written by me are scanner.sh and this README ;) At this point, shout out to the people whose research and dedication made this thing possible.
+
+Also, I am well aware that the coding style in scanner.sh is in some cases an abomination. It is, after all, a quick and dirty script, hacked together in about 45 minutes with some trial and error. I hope it is still somewhat readable (if you choose to do so - for most people, it should just work out of the box). Which brings me to the last section, which probably should have been one of the first ones...
+
+REQUIREMENTS
+
+The python scripts need the modules binascii, hashlib, os, re and sys. You most likely have those.
+
+scanner.sh needs utilises wpa_cli. It is therefore highly recommended that you turn off any other software that would manage your wifi card on the same level as wpa_supplicant does (e.g. rfkill is okay, NetworkManager is not).
+Other than that, just the basics. bash, sed, awk, grep, the usual.
+
+NB: Regarding rfkill - do not rfkill lock your card while this script runs. But if you're the type of person who does that, you probably deserve not being able to run it ;)
