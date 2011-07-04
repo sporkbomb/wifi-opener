@@ -1,0 +1,52 @@
+WIFI-OPENER INTRODUCTION
+
+wifi-opener is a little side project of mine. Its goal is as follows:
+
+	Create a collection of tools that will allow the user to get wifi in urban areas in less than three minutes.
+
+To explain a bit further, you can divide WiFi in urban areas in three (and a half) groups:
+
+
+1. Open networks
+
+This is a no-brainer. If you can get open wifi, you're done. Connect to a VPN/Tor/whatever if you worry about people sniffing. This is NOT the focus of this project, although I might consider adding scripts for them if anything interesting comes up.
+
+
+2. Encrypted networks that take a while to get into
+
+By that, I mean mostly WEP and WPA networks that are not contained in group 3 below. These are also not the scope of this project and never will be.
+WEP is very simple to crack, but needs a fair number of IVs (please read up on aircrack, they have some neat tricks...hint: --cfrag). This might be very easy if you can sniff the traffic of someone who's using that network, but it still takes a few minutes at least. Also, there are...
+
+2a. Encrypted networks that take a long while to get into
+
+Mostly WPA and anything upwards (802.1x and other forms of secondary auth included). Is it _possible_ to get into those networks? Sure. Practical? Usually not. You can't spend an hour or more collecting traffic and then throw it at a GPU cracking monster if you just need wifi access _right now_.
+
+
+3. Encrypted networks that can be opened up
+
+This is what this project is all about. It's about known default password algorithms, hidden networks with known PSKs, tricks that might allow you to tunnel traffic even if you're not authenticated etc.
+
+
+LEGAL NOTE
+
+Depending on your local law, accessing a network that you are not authorised to access might be a severe law. I do NOT accept any responsibility for your illegal endeavours that are based on the knowledge contained in this repository (and also not for any others).
+
+There is no common legal opinion on this, but a judge might consider it a lesser offense if you're connecting to an unencrypted network without authorisation than if you do the same with a network 'secured' by a PSK/WEP key.
+
+Default keys still count as security measures, by the way.
+
+
+UNSUSPICIOUS NOTE PLACED RIGHT BELOW THE LEGAL STUFF PURELY BY CHANCE
+
+Your box might report your hostname and there's a good chance your MAC is going to end up in log files. There's a standard tool called 'hostname' and a not-so-standard tool called 'macchanger'. Hint, hint.
+
+Also, if you don't get too crazy (power <=> responsibility, kthx), you minimise the chances of anybody getting annoyed/bothering to look. Most people probably wouldn't care if you asked them whether you could use their wifi for a second.
+
+Be neighbourly and the world will be the same way to you.
+
+
+STATUS
+
+It works, but I'm closer to 5 minutes in Vienna than the stated 3 minute goal.
+
+Stay tuned for a very interesting tool in the next few weeks, which does seem to get me under 3 minutes in most areas.
