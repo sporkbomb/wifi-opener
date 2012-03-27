@@ -1,0 +1,14 @@
+The 3WebCube is a Huawei-manufactured branded device distributed by 3 as a UMTS-based AP/Router.
+
+Default SSID and PSK are both of the form "3WebCubeXXXX", with X being hex numbers.
+
+Obviously, this is rather bad as it is. Four hex values are two bytes, i.e. 16 bits entropy in their PSK, so as soon as you have a WPA handshake, you're looking at around 65k tries maximum (around 32k average), which is laughable if you're running aircrack at anything remotely resembling modern hardware.
+
+I generated a wordlist you can use with aircrack-ng and added it to this directory. Use `gunzip` on that file and use it as the -w parameter for aircrack-ng.
+
+But, honestly, I'd love to make this a single-try attack. Which means that reversing the key generation algorithm would be a lot more interesting. Sadly, there seems to be no way to dump the firmware from the WebCube purely via software. Also, I have yet to find any firmware updates for the cube.
+The last-resort measure, which I'll probably try out just to get the experience, is dumping the firmware from hardware by desoldering the ROM chip.
+
+Until recently, I thought that one could narrow down the PSK to only one byte entropy.
+As a prerequisite: The internal MAC can be derived from the first 5 bytes of the BSSID and the last byte (actually, the last two chars) of the SSID.
+The last two characters of the PSK MIGHT tend to be the third last byte of md5(internal_mac). However, this doesn't seem to hold true for all models. Further research to be done ;)
